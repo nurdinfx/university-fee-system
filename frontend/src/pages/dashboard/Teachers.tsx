@@ -12,6 +12,7 @@ import { Modal } from '../../components/ui/Modal';
 export default function Teachers() {
   const dispatch = useDispatch();
   const teachers = useSelector((state: RootState) => state.teachers.list);
+  const departments = useSelector((state: RootState) => state.departments.list);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function Teachers() {
   // Form Fields
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [department, setDepartment] = useState('Physics');
+  const [department, setDepartment] = useState('');
   const [designation, setDesignation] = useState('Assistant Professor');
   const [status, setStatus] = useState<'Active' | 'On Leave'>('Active');
 
@@ -28,7 +29,7 @@ export default function Teachers() {
     setEditingTeacher(null);
     setName('');
     setEmail('');
-    setDepartment('Physics');
+    setDepartment(departments[0]?.name || '');
     setDesignation('Assistant Professor');
     setStatus('Active');
     setIsModalOpen(true);
@@ -125,8 +126,12 @@ export default function Teachers() {
               <tbody>
                 {filteredTeachers.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="text-center py-8 text-muted-foreground">
-                      No faculty records found.
+                    <td colSpan={6} className="text-center py-12 text-muted-foreground">
+                      <div className="flex flex-col items-center gap-2">
+                        <UserCheck className="w-8 h-8 opacity-30" />
+                        <p>No faculty records found.</p>
+                        <p className="text-xs opacity-60">Click "Add New Teacher" to appoint the first faculty member.</p>
+                      </div>
                     </td>
                   </tr>
                 ) : (
@@ -135,7 +140,7 @@ export default function Teachers() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground font-bold">
-                            {teacher.name.charAt(4)}
+                            {teacher.name.charAt(0)}
                           </div>
                           <div>
                             <p className="font-semibold text-foreground">{teacher.name}</p>
@@ -201,16 +206,22 @@ export default function Teachers() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-medium">Department</label>
-              <select 
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                value={department} 
-                onChange={e => setDepartment(e.target.value)}
-              >
-                <option value="Physics">Physics</option>
-                <option value="Chemistry">Chemistry</option>
-                <option value="Computer Science">Computer Science</option>
-                <option value="Mathematics">Mathematics</option>
-              </select>
+              {departments.length === 0 ? (
+                <p className="text-xs text-destructive p-2 border border-destructive/30 rounded-md bg-destructive/10">
+                  No departments yet. Add one from Courses & Depts page first.
+                </p>
+              ) : (
+                <select 
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={department} 
+                  onChange={e => setDepartment(e.target.value)}
+                  required
+                >
+                  {departments.map(dept => (
+                    <option key={dept.id} value={dept.name}>{dept.name}</option>
+                  ))}
+                </select>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Designation</label>
@@ -223,6 +234,7 @@ export default function Teachers() {
                 <option value="Associate Professor">Associate Professor</option>
                 <option value="Assistant Professor">Assistant Professor</option>
                 <option value="HOD">HOD</option>
+                <option value="Lecturer">Lecturer</option>
               </select>
             </div>
           </div>
@@ -239,7 +251,9 @@ export default function Teachers() {
           </div>
           <div className="flex justify-end gap-2 pt-4 border-t border-border/50">
             <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>Cancel</Button>
-            <Button type="submit">{editingTeacher ? 'Save Changes' : 'Appoint'}</Button>
+            <Button type="submit" disabled={departments.length === 0}>
+              {editingTeacher ? 'Save Changes' : 'Appoint'}
+            </Button>
           </div>
         </form>
       </Modal>

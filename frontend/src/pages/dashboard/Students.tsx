@@ -12,6 +12,7 @@ import { Modal } from '../../components/ui/Modal';
 export default function Students() {
   const dispatch = useDispatch();
   const students = useSelector((state: RootState) => state.students.list);
+  const departments = useSelector((state: RootState) => state.departments.list);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function Students() {
   // Form Fields
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [department, setDepartment] = useState('Computer Science');
+  const [department, setDepartment] = useState('');
   const [year, setYear] = useState('1st Year');
   const [status, setStatus] = useState<'Active' | 'Graduating' | 'Suspended'>('Active');
 
@@ -28,7 +29,7 @@ export default function Students() {
     setEditingStudent(null);
     setName('');
     setEmail('');
-    setDepartment('Computer Science');
+    setDepartment(departments[0]?.name || '');
     setYear('1st Year');
     setStatus('Active');
     setIsModalOpen(true);
@@ -125,8 +126,12 @@ export default function Students() {
               <tbody>
                 {filteredStudents.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="text-center py-8 text-muted-foreground">
-                      No student records found.
+                    <td colSpan={6} className="text-center py-12 text-muted-foreground">
+                      <div className="flex flex-col items-center gap-2">
+                        <UserPlus className="w-8 h-8 opacity-30" />
+                        <p>No student records found.</p>
+                        <p className="text-xs opacity-60">Click "Add New Student" to register the first student.</p>
+                      </div>
                     </td>
                   </tr>
                 ) : (
@@ -203,16 +208,22 @@ export default function Students() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-medium">Department</label>
-              <select 
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                value={department} 
-                onChange={e => setDepartment(e.target.value)}
-              >
-                <option value="Computer Science">Computer Science</option>
-                <option value="Business Admin">Business Admin</option>
-                <option value="Mechanical Eng">Mechanical Eng</option>
-                <option value="Arts & Humanities">Arts & Humanities</option>
-              </select>
+              {departments.length === 0 ? (
+                <p className="text-xs text-destructive p-2 border border-destructive/30 rounded-md bg-destructive/10">
+                  No departments available. Please add a department first from the Courses & Depts page.
+                </p>
+              ) : (
+                <select 
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  value={department} 
+                  onChange={e => setDepartment(e.target.value)}
+                  required
+                >
+                  {departments.map(dept => (
+                    <option key={dept.id} value={dept.name}>{dept.name}</option>
+                  ))}
+                </select>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Academic Year</label>
@@ -242,7 +253,9 @@ export default function Students() {
           </div>
           <div className="flex justify-end gap-2 pt-4 border-t border-border/50">
             <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>Cancel</Button>
-            <Button type="submit">{editingStudent ? 'Save Changes' : 'Register Student'}</Button>
+            <Button type="submit" disabled={departments.length === 0}>
+              {editingStudent ? 'Save Changes' : 'Register Student'}
+            </Button>
           </div>
         </form>
       </Modal>

@@ -15,12 +15,7 @@ interface TeacherState {
 }
 
 const initialState: TeacherState = {
-  list: [
-    { id: 'EMP001', name: 'Dr. Robert Oppenheimer', email: 'robert.o@university.edu', department: 'Physics', designation: 'Professor', status: 'Active' },
-    { id: 'EMP002', name: 'Prof. Marie Curie', email: 'marie.c@university.edu', department: 'Chemistry', designation: 'HOD', status: 'Active' },
-    { id: 'EMP003', name: 'Dr. Alan Turing', email: 'alan.t@university.edu', department: 'Computer Science', designation: 'Associate Professor', status: 'On Leave' },
-    { id: 'EMP004', name: 'Ada Lovelace', email: 'ada.l@university.edu', department: 'Mathematics', designation: 'Assistant Professor', status: 'Active' },
-  ]
+  list: []
 };
 
 const teacherSlice = createSlice({

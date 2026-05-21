@@ -15,13 +15,7 @@ interface StudentState {
 }
 
 const initialState: StudentState = {
-  list: [
-    { id: 'STU001', name: 'Alice Johnson', email: 'alice.j@university.edu', department: 'Computer Science', year: '3rd Year', status: 'Active' },
-    { id: 'STU002', name: 'Bob Smith', email: 'bob.s@university.edu', department: 'Business Admin', year: '2nd Year', status: 'Active' },
-    { id: 'STU003', name: 'Charlie Brown', email: 'charlie.b@university.edu', department: 'Mechanical Eng', year: '4th Year', status: 'Graduating' },
-    { id: 'STU004', name: 'Diana Prince', email: 'diana.p@university.edu', department: 'Arts & Humanities', year: '1st Year', status: 'Active' },
-    { id: 'STU005', name: 'Evan Wright', email: 'evan.w@university.edu', department: 'Computer Science', year: '3rd Year', status: 'Suspended' },
-  ]
+  list: []
 };
 
 const studentSlice = createSlice({
