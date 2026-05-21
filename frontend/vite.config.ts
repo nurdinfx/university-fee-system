@@ -8,22 +8,48 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      devOptions: {
+        enabled: true
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true
+      },
+      includeAssets: ['favicon.svg', 'icons.svg'],
       manifest: {
-        name: 'University Fee System',
+        name: 'University ERP — Fee Management System',
         short_name: 'UniERP',
-        description: 'University ERP and Fee Management System',
-        theme_color: '#ffffff',
+        description: 'A complete university fee and campus management system. Manage students, faculty, courses, hostel, library, transport and finance.',
+        theme_color: '#7c3aed',
+        background_color: '#0f0f13',
+        display: 'standalone',
+        orientation: 'portrait-primary',
+        scope: '/',
+        start_url: '/',
+        categories: ['education', 'productivity', 'utilities'],
         icons: [
           {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
+            src: 'icons.svg',
+            sizes: 'any',
+            type: 'image/svg+xml',
+            purpose: 'any'
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'favicon.svg',
+            sizes: 'any',
+            type: 'image/svg+xml',
+            purpose: 'maskable'
+          }
+        ],
+        screenshots: [
+          {
+            src: 'favicon.svg',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/svg+xml',
+            form_factor: 'wide',
+            label: 'UniERP Dashboard'
           }
         ]
       }
