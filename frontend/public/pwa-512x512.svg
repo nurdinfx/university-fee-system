@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#1a0a2e"/>
+  <!-- Glow effect -->
+  <circle cx="256" cy="256" r="180" fill="url(#glow)" opacity="0.3"/>
+  <!-- Book shape -->
+  <rect x="156" y="160" width="90" height="120" rx="8" fill="#7c3aed"/>
+  <rect x="266" y="160" width="90" height="120" rx="8" fill="#9d5cf6"/>
+  <!-- Book spine -->
+  <rect x="248" y="155" width="16" height="130" rx="4" fill="#4c1d95"/>
+  <!-- Book pages top -->
+  <path d="M165 160 Q201 150 246 158" stroke="#c4b5fd" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M274 158 Q311 150 347 160" stroke="#ddd6fe" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Lines on left page -->
+  <rect x="170" y="185" width="60" height="6" rx="3" fill="#c4b5fd" opacity="0.7"/>
+  <rect x="170" y="200" width="50" height="6" rx="3" fill="#c4b5fd" opacity="0.5"/>
+  <rect x="170" y="215" width="55" height="6" rx="3" fill="#c4b5fd" opacity="0.5"/>
+  <rect x="170" y="230" width="45" height="6" rx="3" fill="#c4b5fd" opacity="0.4"/>
+  <!-- Lines on right page -->
+  <rect x="278" y="185" width="60" height="6" rx="3" fill="#ddd6fe" opacity="0.7"/>
+  <rect x="278" y="200" width="50" height="6" rx="3" fill="#ddd6fe" opacity="0.5"/>
+  <rect x="278" y="215" width="55" height="6" rx="3" fill="#ddd6fe" opacity="0.5"/>
+  <rect x="278" y="230" width="45" height="6" rx="3" fill="#ddd6fe" opacity="0.4"/>
+  <!-- Graduation cap -->
+  <rect x="216" y="310" width="80" height="10" rx="5" fill="#7c3aed"/>
+  <polygon points="256,280 296,305 256,320 216,305" fill="#9d5cf6"/>
+  <line x1="296" y1="305" x2="296" y2="330" stroke="#7c3aed" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="296" cy="333" r="6" fill="#c4b5fd"/>
+  <!-- Stars -->
+  <circle cx="140" cy="140" r="4" fill="#c4b5fd" opacity="0.6"/>
+  <circle cx="370" cy="120" r="3" fill="#a78bfa" opacity="0.5"/>
+  <circle cx="390" cy="370" r="5" fill="#7c3aed" opacity="0.6"/>
+  <circle cx="120" cy="380" r="3" fill="#c4b5fd" opacity="0.4"/>
+  <!-- Gradient definition -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#1a0a2e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
