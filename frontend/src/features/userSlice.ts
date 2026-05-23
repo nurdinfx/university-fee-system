@@ -5,6 +5,7 @@ export interface SystemUser {
   id: string;
   name: string;
   email: string;
+  password?: string;
   role: 'Super Admin' | 'Admin' | 'Registrar' | 'Accountant' | 'Staff';
   status: 'Active' | 'Inactive';
   lastLogin?: string;
@@ -21,6 +22,7 @@ const initialState: UserState = {
       id: '1',
       name: 'System Administrator',
       email: 'admin@university.edu',
+      password: 'admin',
       role: 'Super Admin',
       status: 'Active',
       lastLogin: new Date().toISOString().split('T')[0]
