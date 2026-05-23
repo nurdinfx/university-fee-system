@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   LayoutDashboard, Users, BookOpen, GraduationCap, 
-  Wallet, Library, Bus, Home, Settings, LogOut, Menu, Bell
+  Wallet, Library, Bus, Home, Settings, LogOut, Menu, Bell, UserCog
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../../utils/cn';
@@ -44,7 +44,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <SidebarItem icon={Bus} label="Transport" to="/dashboard/transport" />
         </div>
         <div className="p-4 border-t border-border">
-          <SidebarItem icon={Settings} label="Settings" to="/dashboard/settings" />
+          <SidebarItem icon={UserCog} label="User Management" to="/dashboard/users" isActive={location.pathname === '/dashboard/users'} />
+          <SidebarItem icon={Settings} label="Settings" to="/dashboard/settings" isActive={location.pathname === '/dashboard/settings'} />
           <SidebarItem icon={LogOut} label="Logout" to="/login" />
         </div>
       </motion.aside>

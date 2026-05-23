@@ -3,6 +3,7 @@ import studentReducer from './studentSlice';
 import teacherReducer from './teacherSlice';
 import financeReducer from './financeSlice';
 import departmentReducer from './departmentSlice';
+import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     teachers: teacherReducer,
     finance: financeReducer,
     departments: departmentReducer,
+    users: userReducer,
   },
 });
 

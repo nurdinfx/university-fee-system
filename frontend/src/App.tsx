@@ -10,6 +10,7 @@ import Library from './pages/dashboard/Library';
 import Hostel from './pages/dashboard/Hostel';
 import Transport from './pages/dashboard/Transport';
 import Settings from './pages/dashboard/Settings';
+import Users from './pages/dashboard/Users';
 
 function App() {
   return (
@@ -60,6 +61,11 @@ function App() {
         <Route path="/dashboard/settings" element={
           <DashboardLayout>
             <Settings />
+          </DashboardLayout>
+        } />
+        <Route path="/dashboard/users" element={
+          <DashboardLayout>
+            <Users />
           </DashboardLayout>
         } />
       </Routes>
